@@ -1,18 +1,16 @@
-import Image from "next/image";
-import PersonalList from "./components/personalList";
-import CreatePersonal from "./components/createPersonal";
+
+//Importamos PrimeReactProvider a App para aplicarlo a todo en nuestro proyecto
+import { PrimeReactProvider } from "primereact/api";
+
 
 
 export default function Home() {
   return (
     <div>
-      <main>
-          <PersonalList/>
-          <CreatePersonal/>
-      </main>
-      <footer>
-        
-      </footer>
+      <PrimeReactProvider>
+        <main></main>
+        <footer></footer>
+      </PrimeReactProvider>
     </div>
   );
 }
