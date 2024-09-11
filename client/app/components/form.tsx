@@ -1,9 +1,9 @@
-'use client';  // Esto indica que es un Client Component
+'use client';  // Esto indica que es un Client Component, los hooks de react como useState no pueden usarse del lado del servidor
 
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 
-import '../components/styles.css'
+
 
 
 //Importar React y FC 
@@ -41,13 +41,13 @@ const UsersForm: React.FC = () => {
         )
     }
     const estadoOptions = [
-        { label: 'Habilitado', value: 'Habilitado' },
-        { label: 'Deshabilitado', value: 'Deshabilitado' }
+        { label: 'ACTIVO', value: 'ACTIVO' },
+        { label: 'INACTIVO', value: 'INACTIVO' }
     ];
 
     return(
         <>
-        
+
         <form onSubmit={handleSubmit} className='p-fluid'>
 
         <div className='p-field'>
