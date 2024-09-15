@@ -9,12 +9,37 @@ const URL = ApiUsers.urlUsers
 export const userServices = {
 // Estos metodos del objeto los hacemos con Axios, en donde se va a crear el CRUD
 
-//METODO GET: Trae todos los usuarios 
+//METODO GET: Trae todos los usuarios del sector 1000 y filtras el paginado recibiendo limit y page por parametros
 
 getUsers: async () => {
     try {
-        const response = await axios.get(`${URL}`)
+        const response = await axios.get(`${URL}?sector=1000`)
         return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+},
+
+
+//METODO GET: Trae un solo usuario
+
+getOneUser: async (id:string) =>{
+    try {
+        const response = await axios.get(`${URL}/personal/${id}`)
+        return response.data
+    } catch (error) {
+        console.log
+    }
+},
+
+//METODO POST: Recibe un objeto, viene del formulario, es un objeto y hay que tiparlo 
+
+postUsers: async (data: {}) => {
+    try {
+        const post = await axios.post(`${URL}`, data)
+        return post.data
+        console.log(post)
     } catch (error) {
         console.log(error)
     }
