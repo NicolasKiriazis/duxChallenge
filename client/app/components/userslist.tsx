@@ -7,8 +7,11 @@ import { userServices } from "../services/userServices";
 import { Dropdown } from "primereact/dropdown";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import UsersForm from "./form";
+import UsersForm from "./modals/createUser";
 import { InputText } from "primereact/inputtext";
+import { Button } from 'primereact/button';
+import { Dialog } from "primereact/dialog";
+import EditUser from "./modals/editUser";
 
 //------------FIN IMPORTACIONES---------------------//
 
@@ -41,6 +44,10 @@ const UsersList: React.FC = () => {
   const [filteredUsers, setFilteredUsers] =useState<User[]>([]) //usuarios filtrados
   const [searchName, setSearchName] = useState<string>('') // Estado para la búsqueda por estado
   const [searchEstado, setSearchEstado] = useState<string | null>(null); // Estado para la búsqueda por estado
+  const [visibleCreate, setVisibleCreate] = useState(false) //Abre y cierra los modal
+  const [visibleEdit, setVisibleEdit] = useState(false) //Abre y cierra los modal
+  const [selectedUser, setSelectedUser] = useState<User | null>(null); //Guarda la data del usuario para el modal de edición
+
 
   // Creamos la función traer data, trae los productos con getUsers
 
@@ -107,10 +114,41 @@ const UsersList: React.FC = () => {
       };
 
     //Retornamos el array de usuarios y lo mandamos al front
+
+    //---------ABRIR MODAL NUEVO USUARIO----------------//
+
+    const openModal = () => {
+      setVisibleCreate(true);
+    };
+
+    //---------CERRAR MODAL NUEVO USUARIO---------------//
+
+    const closeModal = () => {
+      setVisibleCreate(false);
+    };
+
+    //-----------ABRIR MODAL EDITAR USUARIO-----------//
+
+    const openModalEdit = (user: User) => {
+      setVisibleEdit(true);
+      setSelectedUser(user)
+
+    };
+
+    //-----------CERRAR MODAL EDITAR USUARIO-----------//
+
+    const closeModalEdit = () => {
+      setVisibleEdit(false);
+      setSelectedUser(null);
+    };
+
     
     return (
     <>
-    <h2>Lista de usuarios</h2>
+    <div className="p-field">
+    <h2>USUARIOS</h2>
+    <Button label="+ Nuevo Usuario" onClick={openModal}/>
+    </div>
 
     {/*   BARRA BUQUEDA POR NOMBRE Y APELLIDO   */}
 
@@ -138,14 +176,43 @@ const UsersList: React.FC = () => {
         />
       </div>
 
+
+
         <DataTable value={filteredUsers} stripedRows  paginator rows={10}  rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ width: "70rem", height: "25rem" }}>
             <Column field="id" header="Id:"></Column>
-            <Column field="usuario" header="Usuario:"></Column>
+            <Column 
+                    field="usuario" 
+                    header="Usuario:"
+                    body={(rowData: User) => (
+                      <span
+                            // Hacer clic en el nombre del usuario para abrir el modal
+                            onClick={()=> openModalEdit(rowData)}
+                      >{rowData.usuario}</span>
+                    )}
+                    ></Column>
             <Column field="estado" header="Estado:"></Column>
             <Column field="sector" header="Sector:"></Column>
         </DataTable>
 
+
+    <Dialog
+      header="Crear usuario"
+      visible={visibleCreate}
+      onHide={closeModal}
+    >
+
     <UsersForm onUserAdded={handleNewUser} />
+
+    </Dialog>
+
+    <Dialog
+      header="Editar"
+      visible={visibleEdit}
+      onHide={closeModalEdit}
+    >
+
+    </Dialog>
+    <EditUser selectedUser={selectedUser} />
     </>
     );
 };

@@ -35,7 +35,7 @@ getOneUser: async (id:string) =>{
 
 //METODO POST: Recibe un objeto, viene del formulario, es un objeto y hay que tiparlo 
 
-postUsers: async (data: {}) => {
+postUser: async (data: {}) => {
     try {
         const post = await axios.post(`${URL}`, data)
         return post.data
@@ -43,5 +43,20 @@ postUsers: async (data: {}) => {
     } catch (error) {
         console.log(error)
     }
+},
+
+//METODO PUT: Recibe un objeto, viene de formulario y edita 
+
+putUser: async (id: string, data: {}) => {
+
+    try {
+        const response = await axios.put(`${URL}/${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+
 }
+
+
 }

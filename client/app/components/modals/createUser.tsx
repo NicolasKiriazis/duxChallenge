@@ -8,7 +8,7 @@ import { FloatLabel } from 'primereact/floatlabel';
 import React from 'react';
 import { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import { userServices } from '../services/userServices';
+import { userServices } from '../../services/userServices';
 
 interface UsersFormProps {
     onUserAdded: () => void; // Recibe una función que se llamará después de agregar el usuario
@@ -27,7 +27,6 @@ const UsersForm: React.FC<UsersFormProps> = ({onUserAdded}) => {
         //las funciones estas por lo general se llaman handleSubmit
         //cuando declaras la función en typescript vas a recibir por props (parametros) el "e" le tenés que avisar lo siguiente = (e: React.FormEvent<HTMLFormElement>)
 
-
     const [estado, setEstado] = useState<string | null>(null);
     const [sector, setSector] = useState('')
     const [usuario, setUsuario] = useState('')
@@ -40,8 +39,11 @@ const UsersForm: React.FC<UsersFormProps> = ({onUserAdded}) => {
                         usuario
                     }
         try {
-            userServices.postUsers(data)
+            userServices.postUser(data)
             onUserAdded()
+            setEstado(null); // Limpiar Dropdown
+            setSector('');    // Limpiar InputText
+            setUsuario('');   // Limpiar InputText
         } catch (error) {
             console.log("Error al agregar usuario", error)
         }
