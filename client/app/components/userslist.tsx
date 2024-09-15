@@ -132,6 +132,7 @@ const UsersList: React.FC = () => {
     const openModalEdit = (user: User) => {
       setVisibleEdit(true);
       setSelectedUser(user)
+      console.log(user)
 
     };
 
@@ -150,7 +151,7 @@ const UsersList: React.FC = () => {
     <Button label="+ Nuevo Usuario" onClick={openModal}/>
     </div>
 
-    {/*   BARRA BUQUEDA POR NOMBRE Y APELLIDO   */}
+    {/*   BARRA BUSQUEDA POR NOMBRE Y APELLIDO   */}
 
       <div className="p-field">
         <label htmlFor="nombre">Buscar por Nombre y Apellido</label>
@@ -162,7 +163,7 @@ const UsersList: React.FC = () => {
         />        
       </div>
 
-    {/*       BARRA BUSQUEDA POR ESTADO        */}
+    {/*       FILTRO POR ESTADO        */}
 
       <div className="p-field">
         <label htmlFor="estado">Buscar por estado</label>
@@ -210,9 +211,9 @@ const UsersList: React.FC = () => {
       visible={visibleEdit}
       onHide={closeModalEdit}
     >
-
+    {selectedUser && <EditUser user={selectedUser} onUserUpdated={traerData} />}
     </Dialog>
-    <EditUser selectedUser={selectedUser} />
+    
     </>
     );
 };
