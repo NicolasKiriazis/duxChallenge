@@ -140,10 +140,10 @@ const UsersForm: React.FC<UsersFormProps> = ({onUserAdded, isEdit = false, userD
         {/* Botón de eliminar (solo visible en modo edición) */}
         {isEdit && (
                 <Button
-                    label="Eliminar"
+                    label="Borrar"
                     className="p-button-danger"
                     onClick={handleDelete}
-                    type="button"  // Importante: evitar que se envíe el formulario con este botón
+                    type="button" //comentario extra // Importante: evitar que se envíe el formulario con este botón
                 />
             )}
         

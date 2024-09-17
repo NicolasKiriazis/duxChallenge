@@ -11,6 +11,7 @@ import UsersForm from "./modals/userModal";
 import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Dialog } from "primereact/dialog";
+import { GetServerSideProps } from "next";
 
 
 //------------FIN IMPORTACIONES---------------------//
@@ -28,19 +29,25 @@ import { Dialog } from "primereact/dialog";
 
 //-----------------FIN COMENTARIOS SOBRE EL FUNCIONAMIENTO-------------//
 
-const UsersList: React.FC = () => {
   //--------------------INTERFACE DE USUARIO----------------------//
-    interface User {
-        id: string;
-        estado: string;
-        sector: number;
-        usuario: string;
-    }
-  //--------------------FIN INTERFACE DE USUARIO----------------------//
+  interface User {
+    id: string;
+    estado: string;
+    sector: number;
+    usuario: string;
+}
+//--------------------FIN INTERFACE DE USUARIO----------------------//
+
+//-------------------INTERFACE PARA LA PROP(USUARIOS)------------//
+
+   interface UsersPageProps {
+    users: User[] //Definimos que tipo de props le pasamos al componente
+   }
+
+const UsersList: React.FC<UsersPageProps> = ({users}) => {
 
   //-------------------ESTADOS NECESARIOS-----------------------------//
 
-  const [users, setUsers] = useState<User[]>([]); //Todos los usuarios
   const [filteredUsers, setFilteredUsers] =useState<User[]>([]) //usuarios filtrados
   const [searchName, setSearchName] = useState<string>('') // Estado para la búsqueda por estado
   const [searchEstado, setSearchEstado] = useState<string | null>(null); // Estado para la búsqueda por estado
@@ -51,23 +58,23 @@ const UsersList: React.FC = () => {
 
   // Creamos la función traer data, trae los productos con getUsers
 
-    const traerData = async () => {
-    try {
-    const response = await userServices.getUsers();
-        setUsers(response);
-        setFilteredUsers(response); // Inicialmente, los usuarios filtrados son todos
-    } catch (error) {
-        console.log(error);
-    }
-    };
-    {
-    }
+    // const traerData = async () => {
+    // try {
+    // const response = await userServices.getUsers();
+    //     setUsers(response);
+    //     setFilteredUsers(response); 
+    // } catch (error) {
+    //     console.log(error);
+    // }
+    // };
+    // {
+    // }
 
     //useEffect para obtener la data cuando el componente se monta
 
-    useEffect(() => {
-    traerData();
-    }, []);
+    // useEffect(() => {
+    // traerData();
+    // }, []);
 
 
     //-------FUNCION DE BUSQUEDA DE USUARIOS---------------//
@@ -110,7 +117,7 @@ const UsersList: React.FC = () => {
 
      // Función para agregar un usuario nuevo al estado
       const handleNewUser = () => {
-      traerData(); // Refrescamos la lista de usuarios después de agregar uno nuevo
+      setFilteredUsers(users)
       console.log("Actualizo la lista")
       };
 
@@ -212,5 +219,25 @@ const UsersList: React.FC = () => {
     </>
     );
 };
+
+//HACEMOS LA LLAMADA AL GET DEL LADO DEL SERVIDOR
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+      const users = await userServices.getUsers()
+      return {
+          props: {
+              users
+          }
+      }
+  } catch (error) {
+      console.log("Error al traer usuarios" , error)
+      return {
+          props:{
+              users: []
+          }
+      }
+  }
+}
 
 export default UsersList;
