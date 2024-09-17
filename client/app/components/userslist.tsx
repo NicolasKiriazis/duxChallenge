@@ -7,11 +7,11 @@ import { userServices } from "../services/userServices";
 import { Dropdown } from "primereact/dropdown";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import UsersForm from "./modals/createUser";
+import UsersForm from "./modals/userModal";
 import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Dialog } from "primereact/dialog";
-import EditUser from "./modals/editUser";
+
 
 //------------FIN IMPORTACIONES---------------------//
 
@@ -45,9 +45,9 @@ const UsersList: React.FC = () => {
   const [searchName, setSearchName] = useState<string>('') // Estado para la búsqueda por estado
   const [searchEstado, setSearchEstado] = useState<string | null>(null); // Estado para la búsqueda por estado
   const [visibleCreate, setVisibleCreate] = useState(false) //Abre y cierra los modal
-  const [visibleEdit, setVisibleEdit] = useState(false) //Abre y cierra los modal
   const [selectedUser, setSelectedUser] = useState<User | null>(null); //Guarda la data del usuario para el modal de edición
-
+  const [isEdit, setIsEdit] = useState(false)
+  const [label, setLabel] = useState<string>('')
 
   // Creamos la función traer data, trae los productos con getUsers
 
@@ -111,6 +111,7 @@ const UsersList: React.FC = () => {
      // Función para agregar un usuario nuevo al estado
       const handleNewUser = () => {
       traerData(); // Refrescamos la lista de usuarios después de agregar uno nuevo
+      console.log("Actualizo la lista")
       };
 
     //Retornamos el array de usuarios y lo mandamos al front
@@ -119,29 +120,27 @@ const UsersList: React.FC = () => {
 
     const openModal = () => {
       setVisibleCreate(true);
+      setLabel("Crear Usuario:")
     };
 
     //---------CERRAR MODAL NUEVO USUARIO---------------//
 
     const closeModal = () => {
       setVisibleCreate(false);
+      setIsEdit(false)
+      setSelectedUser(null)
+      setVisibleCreate(false)
     };
 
-    //-----------ABRIR MODAL EDITAR USUARIO-----------//
+    //---------ABRIR MODAL EDITAR USUARIO--------------//
 
     const openModalEdit = (user: User) => {
-      setVisibleEdit(true);
+      setIsEdit(true)
       setSelectedUser(user)
-      console.log(user)
+      setVisibleCreate(true)
+      setLabel("Editar Usuario:")
+    }
 
-    };
-
-    //-----------CERRAR MODAL EDITAR USUARIO-----------//
-
-    const closeModalEdit = () => {
-      setVisibleEdit(false);
-      setSelectedUser(null);
-    };
 
     
     return (
@@ -197,21 +196,17 @@ const UsersList: React.FC = () => {
 
 
     <Dialog
-      header="Crear usuario"
+      header={label}
       visible={visibleCreate}
       onHide={closeModal}
     >
 
-    <UsersForm onUserAdded={handleNewUser} />
+    <UsersForm 
+    onUserAdded={handleNewUser}
+    isEdit={isEdit}
+    userData={selectedUser}
+    />
 
-    </Dialog>
-
-    <Dialog
-      header="Editar"
-      visible={visibleEdit}
-      onHide={closeModalEdit}
-    >
-    {selectedUser && <EditUser user={selectedUser} onUserUpdated={traerData} />}
     </Dialog>
     
     </>

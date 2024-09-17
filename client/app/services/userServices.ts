@@ -38,8 +38,8 @@ getOneUser: async (id:string) =>{
 postUser: async (data: {}) => {
     try {
         const post = await axios.post(`${URL}`, data)
+        console.log( `Prueba de que funciona bien ${data}`)
         return post.data
-        console.log(post)
     } catch (error) {
         console.log(error)
     }
@@ -50,13 +50,24 @@ postUser: async (data: {}) => {
 putUser: async (id: string, data: {}) => {
 
     try {
-        const response = await axios.put(`${URL}/${id}`)
+        const response = await axios.put(`${URL}/${id}`, data)
         return response.data
+        console.log(data)
     } catch (error) {
         console.log(error)
     }
 
-}
+},
 
+//METODO DELETE: Borra un objeto 
+
+deleteUser: async(id: string) => {
+    try {
+        const response = await axios.delete(`${URL}/${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 }
