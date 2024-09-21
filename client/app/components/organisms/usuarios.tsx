@@ -15,7 +15,7 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
   }
 
     return(
-        <><Buttons ButtonAction={prueba} texto='prueba' classButton='p-button-danger'/>
+        <><Buttons ButtonAction={prueba} texto='prueba'/>
         </>
     )
 }

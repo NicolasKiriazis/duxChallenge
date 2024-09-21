@@ -1,12 +1,13 @@
 import { Button } from 'primereact/button';
 import React from 'react'
 
-// El botón recibe por props lo que hace en el OnClick y el texto a mostrar
+// El botón recibe por props lo que hace en el OnClick y el texto a mostrar además de la clase para modificar su estilo si se necesita
+
 
 interface ButtonProps {
     ButtonAction: () => void
     texto: string
-    classButton: string
+    classButton?: string
 }
 
 const Buttons:React.FC<ButtonProps> = ({ButtonAction, texto, classButton})=> {
