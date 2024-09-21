@@ -1,22 +1,20 @@
 
 //Importamos PrimeReactProvider a App para aplicarlo a todo en nuestro proyecto
 import { PrimeReactProvider } from "primereact/api";
-
-import 'primereact/resources/themes/saga-blue/theme.css';  // Puedes cambiar este tema a otro de tu elección
-import 'primereact/resources/primereact.min.css';          // Estilos principales de PrimeReact
-import 'primeicons/primeicons.css';                        // PrimeIcons si las estás utilizando
-import UsersList from "./components/userslist";
+import { userServices } from "./services/userServices";
+import Usuarios from "./components/organisms/usuarios";
 
 
 
-export default function Home() {
+export default async function Home() {
+
+  const users = await userServices.getUsers()
+
   return (
     <div>
       <PrimeReactProvider>
         <main>
-
-        <UsersList/>
-
+        <Usuarios users={users} />
         </main>
         <footer></footer>
       </PrimeReactProvider>
