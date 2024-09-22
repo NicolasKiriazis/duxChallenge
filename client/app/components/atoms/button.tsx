@@ -6,7 +6,7 @@ import React from 'react'
 
 interface ButtonProps {
     ButtonAction: () => void
-    texto: string
+    texto?: string
     classButton?: string
     icon?: string
     severityClass?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'contrast'; // Especificamos los valores permitidos

@@ -32,7 +32,7 @@ const DropDownMolecule = () => {
 
     return<>
 
-    <div className='dropdown-icon-container'>
+    <div className="dropdown-icon-container bg-pink-500">
     
     <DropDown state={searchEstado} options={estadoOptions} setState={setSearchEstado} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} />
     

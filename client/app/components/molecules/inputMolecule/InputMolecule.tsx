@@ -9,11 +9,13 @@ const prueba = () => {
 }
 
 return<>
-
+    
+    <div className="bg-blue-700">
     <IconField iconPosition="left">
     <Icons name='pi-search' />
     <Input state="hola" setState={prueba}/>
     </IconField>
+    </div>
 
 </>
 }

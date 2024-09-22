@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import Navbar from "./components/layouts/navbar";
 import Footer from "./components/layouts/footer";
 
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
-import 'primereact/resources/themes/bootstrap4-light-blue/theme.css'
 import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css'
+import '../app/globals.css'
 
 export const metadata: Metadata = {
   title: "Dux Challenge",

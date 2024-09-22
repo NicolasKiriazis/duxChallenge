@@ -1,4 +1,5 @@
 import Buttons from "../../atoms/button"
+import ButtonMolecule from "../iconsMolecule/iconsMolecule"
 
 
 const UserMolecule = () => { 
@@ -18,6 +19,8 @@ const UserMolecule = () => {
     <Buttons texto="+ Nuevo Usuario" ButtonAction={Action} classButton="h-3rem "/>
     </div>
     </div>
+
+    <ButtonMolecule/>
     
     </>
 }
