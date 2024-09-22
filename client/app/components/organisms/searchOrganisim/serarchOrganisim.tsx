@@ -16,12 +16,12 @@ interface SearchOrganisimProps {
     sector: string
 
     estadoOptions:Options[]
-
     sectorOptions:Options[]
 
+    resetFilters: () => void
 }
 
-const SearchOrganisim:React.FC<SearchOrganisimProps>= ({name, setName, state, setState, sector, setSector, estadoOptions, sectorOptions }) => {
+const SearchOrganisim:React.FC<SearchOrganisimProps>= ({name, setName, state, setState, sector, setSector, estadoOptions, sectorOptions, resetFilters }) => {
 
     return<>
     
@@ -34,7 +34,7 @@ const SearchOrganisim:React.FC<SearchOrganisimProps>= ({name, setName, state, se
     </div>
 
     <div className="">
-    <ButtonMolecule/>
+    <ButtonMolecule resetFilters={resetFilters}/>
     </div>
 
     </div>

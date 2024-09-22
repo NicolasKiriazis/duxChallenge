@@ -51,7 +51,15 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
       setFilteredUsers(filtered);
       }
 
-      // Ejecutar la búsqueda cada vez que cambie algún valor de los inputs
+     // Función para restablecer los valores y usuarios
+    const resetFilters = () => {
+      setName('');
+      setState('');
+      setSector('');
+      setFilteredUsers(users); // Restablecer usuarios por defecto
+    }
+
+    // Ejecutar la búsqueda cada vez que cambie algún valor de los inputs
 
       useEffect(() => {
       handleSearch();
@@ -69,6 +77,7 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
             setSector={setSector}
             sectorOptions={sectorOptions}
             estadoOptions={estadoOptions}
+            resetFilters={resetFilters}
         />
 
         <div className="flex justify-content-center">
