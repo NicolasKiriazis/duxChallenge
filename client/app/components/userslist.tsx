@@ -222,22 +222,6 @@ const UsersList: React.FC<UsersPageProps> = ({users}) => {
 
 //HACEMOS LA LLAMADA AL GET DEL LADO DEL SERVIDOR
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-      const users = await userServices.getUsers()
-      return {
-          props: {
-              users
-          }
-      }
-  } catch (error) {
-      console.log("Error al traer usuarios" , error)
-      return {
-          props:{
-              users: []
-          }
-      }
-  }
-}
+
 
 export default UsersList;

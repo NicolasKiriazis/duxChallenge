@@ -21,18 +21,6 @@ getUsers: async () => {
     }
 },
 
-
-//METODO GET: Trae un solo usuario
-
-getOneUser: async (id:string) =>{
-    try {
-        const response = await axios.get(`${URL}/personal/${id}`)
-        return response.data
-    } catch (error) {
-        console.log
-    }
-},
-
 //METODO POST: Recibe un objeto, viene del formulario, es un objeto y hay que tiparlo 
 
 postUser: async (data: {}) => {
