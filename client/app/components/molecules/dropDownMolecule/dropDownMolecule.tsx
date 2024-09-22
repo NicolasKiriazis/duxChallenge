@@ -3,26 +3,22 @@ import Icons from '../../atoms/icons';
 import DropDown from '../../atoms/dropDown';
 import { useState } from 'react';
 import React from 'react';
+import {Options} from "../../../types/type"
 
 
 interface DropDownMoleculeProps{
 
     placeHolder: string
 
+    state: string
+    setState: (state:string) => void
+
+    options: Options[]
+
 }
 
-const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder}) => {
+const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder, state, setState, options}) => {
 
-    const [searchEstado, setSearchEstado] = useState<string | null>(null); // Estado para la búsqueda por estado
-    
-    const estadoOptions = [
-    { label: 'ACTIVO', value: 'ACTIVO' },
-    { label: 'INACTIVO', value: 'INACTIVO' }
-    ];
-
-    const sectorOptions = [
-    {label: '1000', value: '1000'}
-    ]
 
     //Traer la lupa
 
@@ -40,9 +36,9 @@ const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder}) => {
 
     return<>
 
-    <div className="dropdown-icon-container  md:w-4">
+    <div className="dropdown-icon-container  md:w-4 mr-2">
     
-    <DropDown state={searchEstado} options={estadoOptions} setState={setSearchEstado} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} className="h-3rem w-full" />
+    <DropDown state={state} options={options} setState={setState} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} className="h-3rem w-full" />
     
     </div>
     

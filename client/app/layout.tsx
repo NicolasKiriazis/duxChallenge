@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 
-import Navbar from "./components/layouts/navbar";
-import Footer from "./components/layouts/footer";
-
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-
 import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css'
 import '../app/globals.css'
+import Navbar from "./components/organisms/navBarOrganisim/navBarOrganisim";
+
 
 export const metadata: Metadata = {
   title: "Dux Challenge",
@@ -24,7 +22,7 @@ export default function RootLayout({
       <body>
         <Navbar/>
         {children}
-        <Footer/>
+        
       </body>
     </html>
   );

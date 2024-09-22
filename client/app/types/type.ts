@@ -8,3 +8,8 @@ export interface User {
 export interface UsersPageProps {
     users: User[]
 }
+
+export interface Options {
+    label: string
+    value: string
+}

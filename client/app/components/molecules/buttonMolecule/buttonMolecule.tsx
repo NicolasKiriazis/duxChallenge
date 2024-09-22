@@ -9,8 +9,8 @@ const ButtonMolecule = () => {
 
     return<>
     <>
-    <div className="flex justify-content-center">
-    <Buttons ButtonAction={prueba} icon="pi pi-filter" severityClass="secondary" areaLabel="Bookmark"/>
+    <div className="flex justify-content-center mt-2 md:mt-0">
+    <Buttons ButtonAction={prueba} icon="pi pi-filter" severityClass="secondary" areaLabel="Bookmark" classButton="mr-2"/>
     <Buttons ButtonAction={prueba} icon="pi pi-sliders-v" severityClass="secondary" areaLabel="Bookmark"/>
     </div>
     </>
