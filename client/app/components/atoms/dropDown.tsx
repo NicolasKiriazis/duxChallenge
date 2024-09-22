@@ -12,10 +12,11 @@ interface DropDownProps{
     setState: (value: string) => void
     placeHolder: string
     valueIcon?: (option: any, props: any) => React.ReactNode; // Actualizamos el tipo de valueIcon
+    className?: string
 }
 
 
-const DropDown:React.FC<DropDownProps> = ({state, options, setState, placeHolder, valueIcon}) => {
+const DropDown:React.FC<DropDownProps> = ({state, options, setState, placeHolder, valueIcon , className}) => {
     
      // Template para incluir el icono en el placeholder
 
@@ -26,6 +27,7 @@ return<>
         onChange={(e) => setState(e.value)}
         placeholder={placeHolder}
         valueTemplate={valueIcon} // Añadimos la plantilla personalizada
+        className={className}
     />
 </>
 }

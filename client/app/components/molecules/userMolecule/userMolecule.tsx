@@ -1,5 +1,5 @@
 import Buttons from "../../atoms/button"
-import ButtonMolecule from "../iconsMolecule/iconsMolecule"
+import ButtonMolecule from "../buttonMolecule/buttonMolecule"
 
 
 const UserMolecule = () => { 

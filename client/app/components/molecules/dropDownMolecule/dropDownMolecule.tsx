@@ -2,9 +2,16 @@ import { IconField } from 'primereact/iconfield';
 import Icons from '../../atoms/icons';
 import DropDown from '../../atoms/dropDown';
 import { useState } from 'react';
+import React from 'react';
 
 
-const DropDownMolecule = () => {
+interface DropDownMoleculeProps{
+
+    placeHolder: string
+
+}
+
+const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder}) => {
 
     const [searchEstado, setSearchEstado] = useState<string | null>(null); // Estado para la búsqueda por estado
     
@@ -22,8 +29,9 @@ const DropDownMolecule = () => {
     const valueTemplate = (option: any, props: any) => {
         if (!option) {
             return (
-            <div className="dropdown-placeholder">
-                <i className="pi pi-search" style={{ marginRight: '8px' }}></i>
+            <div className="dropdown-placeholder h-1rem flex flex-row align-items-center my-1">
+                <i className="pi pi-search flex align-items-center"></i>
+                <p className="flex align-items-center ml-2">{placeHolder}</p>
             </div>
         );
         }
@@ -32,9 +40,9 @@ const DropDownMolecule = () => {
 
     return<>
 
-    <div className="dropdown-icon-container bg-pink-500">
+    <div className="dropdown-icon-container  md:w-4">
     
-    <DropDown state={searchEstado} options={estadoOptions} setState={setSearchEstado} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} />
+    <DropDown state={searchEstado} options={estadoOptions} setState={setSearchEstado} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} className="h-3rem w-full" />
     
     </div>
     

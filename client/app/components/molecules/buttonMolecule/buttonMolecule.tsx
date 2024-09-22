@@ -9,7 +9,7 @@ const ButtonMolecule = () => {
 
     return<>
     <>
-    <div className="bg-yellow-400">
+    <div className="flex justify-content-center">
     <Buttons ButtonAction={prueba} icon="pi pi-filter" severityClass="secondary" areaLabel="Bookmark"/>
     <Buttons ButtonAction={prueba} icon="pi pi-sliders-v" severityClass="secondary" areaLabel="Bookmark"/>
     </div>

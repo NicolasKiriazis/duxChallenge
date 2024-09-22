@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { UsersPageProps } from '@/app/types/type'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
+import SearchOrganisim from './searchOrganisim/serarchOrganisim'
 
 const Usuarios:React.FC<UsersPageProps> = ({users}) => {
 
@@ -26,6 +27,8 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
         <Column field="estado" header="Estado:"></Column>
         <Column field="sector" header="Sector:"></Column>
         </DataTable> */}
+
+        <SearchOrganisim/>
 
         </>
     )

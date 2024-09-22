@@ -10,10 +10,10 @@ const prueba = () => {
 
 return<>
     
-    <div className="bg-blue-700">
+    <div className="h-3rem md:w-4">
     <IconField iconPosition="left">
     <Icons name='pi-search' />
-    <Input state="hola" setState={prueba}/>
+    <Input state="hola" setState={prueba} className="h-3rem w-full" />
     </IconField>
     </div>
 
