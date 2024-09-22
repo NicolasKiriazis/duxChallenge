@@ -5,6 +5,8 @@ import Footer from "./components/layouts/footer";
 
 
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css'
+import 'primeicons/primeicons.css'
+import '/node_modules/primeflex/primeflex.css'
 
 export const metadata: Metadata = {
   title: "Dux Challenge",

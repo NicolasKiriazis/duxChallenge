@@ -1,9 +1,16 @@
+import React from "react"
+import { InputIcon } from 'primereact/inputicon';
 
-
-
-
-const Buttons = () => {
-    return<></>
+interface IconsProps{
+    name: string; // El nombre del icono a mostrar
+    size?: number; // Tamaño opcional
+    color?: string; // Color opcional
 }
 
-export default Buttons
+const Icons:React.FC<IconsProps> = ({name,size,color}) => {
+    return<>
+    <InputIcon className={`pi ${name}`} style={{ fontSize: size, color }}></InputIcon>
+    </>
+}
+
+export default Icons
