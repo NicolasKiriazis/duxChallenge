@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css'
 import '../app/globals.css'

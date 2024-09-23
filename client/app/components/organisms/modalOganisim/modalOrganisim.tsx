@@ -7,6 +7,7 @@ import { Message } from "primereact/message"
 import DropDownMolecule from "../../molecules/dropDownMolecule/dropDownMolecule"
 import { userServices } from "@/app/services/userServices"
 import { Button } from "primereact/button"
+import Buttons from "../../atoms/button"
 
 interface ModalOrganismProps {
     estadoOptions: Options[]
@@ -35,10 +36,63 @@ const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOption
             setUsuario(userData.usuario)
         }
     }, [isEdit, userData])
-    
 
+     // Estado para manejar los errores
+    const [errors, setErrors] = useState({
+    id: "",
+    usuario: "",
+    estado: "",
+    sector: "",
+    });
+
+    // Validación de los campos del formulario
+    const validateForm = () => {
+    const newErrors = {
+        id: "",
+        usuario: "",
+        estado: "",
+        sector: "",
+    };
+
+    // Validar id (debe ser numérico y no más de 6 dígitos)
+    if (!/^\d+$/.test(id)) {
+    newErrors.id = "El id solo puede contener números.";
+    }
+    if (id.length > 6) {
+    newErrors.id = "El id no puede tener más de 6 caracteres.";
+    }
+
+    // Validar usuario (no vacío y no más de 20 caracteres)
+    if (usuario.trim() === "") {
+    newErrors.usuario = "El nombre no puede estar vacío.";
+    }
+    if (usuario.length > 20) {
+    newErrors.usuario = "El nombre no puede tener más de 20 caracteres.";
+    }
+
+    // Validar estado (no vacío)
+    if (!estado) {
+    newErrors.estado = "El estado es obligatorio.";
+    }
+
+    // Validar sector (no vacío)
+    if (sector.trim() === "") {
+    newErrors.sector = "El sector es obligatorio.";
+    }
+
+    setErrors(newErrors);
+
+    // Retornar true si no hay errores
+    return Object.values(newErrors).every((error) => error === "");
+    };
+    
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+    // Validar formulario antes de enviar
+    if (!validateForm()) {
+        return;
+    }
 
         const data= {
                 id,
@@ -98,12 +152,13 @@ return <>
     <div className="flex flex-column justify-content-center">
     <h2>Id:</h2>
     <Input state={id} setState={setId} />
+    {errors.id && <Message severity="error" text={errors.id} />} 
     </div>
     
     <div className="flex flex-column justify-content-center">
     <h2>Nombre:</h2>
     <Input state={usuario} setState={setUsuario} />
-    {/* <Message severity="error" text="Username is required" /> */}
+    {errors.usuario && <Message severity="error" text={errors.usuario} />}
     </div>
 
     <div className="flex flex-column justify-content-center">
@@ -111,26 +166,28 @@ return <>
     <div className="bg-black">
     <DropDownMolecule placeHolder="Seleccionar el Estado" state={estado} setState={setEstado} options={estadoOptions} className="w-max" />
     </div>
-    {/* <Message severity="error" text="Username is required" /> */}
+    {errors.estado && <Message severity="error" text={errors.estado} />}
     </div>
 
     <div className="flex flex-column justify-content-center w-full">
     <h2>Sector:</h2>
     <DropDownMolecule placeHolder="Seleccionar el Estado" state={sector} setState={setSector} options={sectorOptions}/>
-    {/* <Message severity="error" text="Username is required" /> */}
+    {errors.sector && <Message severity="error" text={errors.sector} />}
     </div>
 
-    <Button label="Enviar" type="submit"/>
+    <div className="flex flex-row justify-content-center">
+    <Buttons texto="Enviar" ButtonAction={onUserAdded} classButton="h-3rem bg-blue-500 mr-10"/>
 
-{/* Botón de eliminar (solo visible en modo edición) */}
-{isEdit && (
-        <Button
-            label="Borrar"
-            className="p-button-danger"
-            onClick={handleDelete}
-            type="button" //comentario extra // Importante: evitar que se envíe el formulario con este botón
+    {/* Botón de eliminar (solo visible en modo edición) */}
+    {isEdit && (
+        <Buttons
+            texto="Borrar"
+            classButton="p-button-danger"
+            ButtonAction={handleDelete}
         />
-)}
+    )}
+
+    </div>
 
 
     </form>
