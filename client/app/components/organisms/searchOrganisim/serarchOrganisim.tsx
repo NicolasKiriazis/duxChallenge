@@ -29,8 +29,8 @@ const SearchOrganisim:React.FC<SearchOrganisimProps>= ({name, setName, state, se
 
     <div className="sm:w-full md:flex flex-row justify-content-between">
     <InputMolecule state={name} setState={setName}/>
-    <DropDownMolecule state={state} setState={setState} placeHolder="Seleccione el Estado" options={estadoOptions}/>
-    <DropDownMolecule state={sector} setState={setSector} placeHolder="Seleccione el Sector" options={sectorOptions}/>
+    <DropDownMolecule state={state} setState={setState} placeHolder="Seleccione el Estado" options={estadoOptions} className="h-3rem w-full"/>
+    <DropDownMolecule state={sector} setState={setSector} placeHolder="Seleccione el Sector" options={sectorOptions} className="h-3rem w-full"/>
     </div>
 
     <div className="">

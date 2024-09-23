@@ -1,12 +1,12 @@
+import React from "react"
 import Buttons from "../../atoms/button"
 import ButtonMolecule from "../buttonMolecule/buttonMolecule"
 
+interface UserMoleculeProps{
+    action: () => void
+}
 
-const UserMolecule = () => { 
-
-    const Action = () => {
-        console.log("prueba")
-    }
+const UserMolecule:React.FC<UserMoleculeProps> = ({action}) => { 
 
     return<>
 
@@ -16,7 +16,7 @@ const UserMolecule = () => {
     </div>
     
     <div className="flex justify-content-center md:mr-5 my-3">
-    <Buttons texto="+ Nuevo Usuario" ButtonAction={Action} classButton="h-3rem bg-blue-500"/>
+    <Buttons texto="+ Nuevo Usuario" ButtonAction={action} classButton="h-3rem bg-blue-500"/>
     </div>
     </div>
 

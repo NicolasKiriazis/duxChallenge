@@ -10,14 +10,16 @@ interface DropDownMoleculeProps{
 
     placeHolder: string
 
-    state: string
+    state: string | null;
     setState: (state:string) => void
 
     options: Options[]
 
+    className?: string
+
 }
 
-const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder, state, setState, options}) => {
+const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder, state, setState, options, className}) => {
 
 
     //Traer la lupa
@@ -36,9 +38,9 @@ const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder, state, s
 
     return<>
 
-    <div className="dropdown-icon-container  md:w-4 mr-2">
+    <div className="dropdown-icon-container md:w-4 mr-2">
     
-    <DropDown state={state} options={options} setState={setState} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} className="h-3rem w-full" />
+    <DropDown state={state} options={options} setState={setState} placeHolder='Seleccionar Sector' valueIcon={valueTemplate} className={className} />
     
     </div>
     
@@ -46,3 +48,5 @@ const DropDownMolecule:React.FC<DropDownMoleculeProps> = ({placeHolder, state, s
 }
 
 export default DropDownMolecule
+
+// "h-3rem w-full"

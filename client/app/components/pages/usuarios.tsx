@@ -5,20 +5,58 @@ import React, { useEffect, useState } from 'react'
 import { UsersPageProps, User } from '@/app/types/type'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
-import SearchOrganisim from '../searchOrganisim/serarchOrganisim'
-import Icons from '../../atoms/icons'
-import UserMolecule from '../../molecules/userMolecule/userMolecule'
-import Navbar from '../navBarOrganisim/navBarOrganisim'
+import SearchOrganisim from '../organisms/searchOrganisim/serarchOrganisim'
+import Icons from '../atoms/icons'
+import UserMolecule from '../molecules/userMolecule/userMolecule'
+import Navbar from '../organisms/navBarOrganisim/navBarOrganisim'
+import ModalOrganism from '../organisms/modalOganisim/modalOrganisim'
+import { Dialog } from 'primereact/dialog'
+import { userServices } from '@/app/services/userServices'
 
 const Usuarios:React.FC<UsersPageProps> = ({users}) => {
+
+    //Estados para filtrar usuarios
 
     const [filteredUsers, setFilteredUsers] = useState<User[]>(users)
     const [name, setName] = useState<string>('')
     const [state, setState] = useState<string>('')
     const [sector, setSector] = useState<string>('')
 
-    //Tenemos que traer 2 valores de los inputs (Lo que escriben en nombre y el dropdown de estado)//
+    //Estados para el modal (Seleccionar un usuario, abrir y cerrarlo y establecer modo edición)
+    
+    const [visibleCreate, setVisibleCreate] = useState(false) //Abre y cierra los modal
+    const [selectedUser, setSelectedUser] = useState<User | null>(null); //Guarda la data del usuario para el modal de edición
+    const [isEdit, setIsEdit] = useState(false)
+    const [label, setLabel] = useState<string>('')
+    
 
+    //---------ABRIR MODAL NUEVO USUARIO----------------//
+
+    const openModal = () => {
+      setVisibleCreate(true);
+      setLabel("Crear Usuario:")
+    };
+
+    //---------CERRAR MODAL NUEVO USUARIO---------------//
+
+    const closeModal = () => {
+      setVisibleCreate(false);
+      setIsEdit(false)
+      setSelectedUser(null)
+      setVisibleCreate(false)
+    };
+
+    //---------ABRIR MODAL EDITAR USUARIO--------------//
+
+    const openModalEdit = (user: User) => {
+      setIsEdit(true)
+      setSelectedUser(user)
+      setVisibleCreate(true)
+      setLabel("Editar Usuario:")
+    }
+
+    //Opciones para los Dropdown de estado y de sector//
+    
     const sectorOptions = [
       {label: '1000', value: '1000'}
     ]
@@ -51,23 +89,39 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
       setFilteredUsers(filtered);
       }
 
-     // Función para restablecer los valores y usuarios
+    // Función para restablecer los valores después de filtrar usuarios
     const resetFilters = () => {
       setName('');
       setState('');
       setSector('');
       setFilteredUsers(users); // Restablecer usuarios por defecto
+      console.log("Actualizo la lista")
     }
 
     // Ejecutar la búsqueda cada vez que cambie algún valor de los inputs
-
       useEffect(() => {
       handleSearch();
       }, [name, state]);
 
+    
+
+    // Función para agregar un usuario nuevo al estado
+    const handleNewUser = async () => {
+      try {
+        // Esperar la resolución de la promesa para obtener los usuarios actualizados
+        const usersUpdate = await userServices.getUsers();
+        
+        // Actualizar el estado con los usuarios obtenidos
+        setFilteredUsers(usersUpdate);
+    } catch (error) {
+        console.error("Error al obtener los usuarios actualizados:", error);
+    }
+    };
+
+
     return(
         <>
-        <UserMolecule/>
+        <UserMolecule action={openModal}/>
         <SearchOrganisim 
             name={name} 
             setName={setName} 
@@ -91,7 +145,7 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
                     body={(rowData: User) => (
                       <span
                             // Hacer clic en el nombre del usuario para abrir el modal
-                            onClick={()=> console.log(rowData)}
+                            onClick={()=> openModalEdit(rowData)}
                       >{rowData.usuario}</span>
                     )}
                     ></Column>
@@ -99,6 +153,22 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
         <Column field="sector" header="Sector:" sortable></Column>
         </DataTable>
         </div>
+
+        <Dialog
+            header={label}
+            visible={visibleCreate}
+            onHide={closeModal}
+            style={{ width: '70vw' }}
+            headerStyle={{ backgroundColor: '#0a5bce', color: 'white' }}  // Aquí aplicas el estilo personalizado
+        >
+        <ModalOrganism
+            sectorOptions={sectorOptions}
+            estadoOptions={estadoOptions}
+            onUserAdded={handleNewUser}
+            isEdit={isEdit}
+            userData={selectedUser}
+        />
+        </Dialog>
         
 
         </>
