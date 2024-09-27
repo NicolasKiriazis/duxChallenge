@@ -107,7 +107,6 @@ const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOption
                 await userServices.putUser(userData.id, data);
             } else {
                 await userServices.postUser(data)
-                onUserAdded()
             }
             // Notificamos que se ha agregado o editado un usuario
             onUserAdded()
@@ -176,13 +175,13 @@ return <>
     </div>
 
     <div className="flex flex-row justify-content-center">
-    <Buttons texto="Enviar" ButtonAction={onUserAdded} classButton="h-3rem bg-blue-500 mr-10"/>
+    <Buttons texto="✓ Confirmar" ButtonAction={onUserAdded} classButton="h-3rem bg-custom mr-10"/>
 
     {/* Botón de eliminar (solo visible en modo edición) */}
     {isEdit && (
         <Buttons
-            texto="Borrar"
-            classButton="p-button-danger"
+            texto="✓ Cancelar"
+            classButton="bg-white text-color-custom ml-2"
             ButtonAction={handleDelete}
         />
     )}

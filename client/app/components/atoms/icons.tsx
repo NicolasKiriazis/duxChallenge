@@ -5,6 +5,7 @@ interface IconsProps{
     name: string; // El nombre del icono a mostrar
     size?: number; // Tamaño opcional
     color?: string; // Color opcional
+    className?: string
 }
 
 const Icons:React.FC<IconsProps> = ({name,size,color}) => {

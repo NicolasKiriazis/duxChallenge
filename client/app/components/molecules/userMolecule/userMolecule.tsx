@@ -16,7 +16,7 @@ const UserMolecule:React.FC<UserMoleculeProps> = ({action}) => {
     </div>
     
     <div className="flex justify-content-center md:mr-5 my-3">
-    <Buttons texto="+ Nuevo Usuario" ButtonAction={action} classButton="h-3rem bg-blue-500"/>
+    <Buttons texto="+ Nuevo Usuario" ButtonAction={action} classButton="h-3rem bg-custom"/>
     </div>
     </div>
 

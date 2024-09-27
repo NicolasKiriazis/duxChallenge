@@ -146,7 +146,7 @@ const Usuarios:React.FC<UsersPageProps> = ({users}) => {
                       <span
                             // Hacer clic en el nombre del usuario para abrir el modal
                             onClick={()=> openModalEdit(rowData)}
-                            style={{ color: 'blue', textDecoration: 'underline', fontWeight: 'bold' }}
+                            style={{ color: '#0763e7', textDecoration: 'underline', fontWeight: 'bold' }}
                       >{rowData.usuario}</span>
                     )}
                     ></Column>
