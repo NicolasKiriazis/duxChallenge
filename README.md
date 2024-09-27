@@ -19,7 +19,8 @@ Se solicitó crear un Modal reutilizable para la creación y edición de usuario
 - Deuda tecnica: El modal reutilizable tiene sus dropdowns con width más chico del pedido en figma. Entiendo que tengo una class de prime react que se pisa con otra y hace que eso se vea así
   Si bien es reutilizable, tengo que modificarlo para que sea 100% editable en todos los lugares donde se requiera.
 
-- Deuda tecnica(23/09/2024 - actualizable) No creé el modal que se abre cuando tocas el logo de dux, lo puedo hacer esta tarde, por falta de tiempo ayer domingo no lo agregué. 
+- Deuda tecnica(23/09/2024 - actualizable) No creé el modal que se abre cuando tocas el logo de dux, lo puedo hacer esta tarde, por falta de tiempo ayer domingo no lo agregué.
+- (27/09/2024 - Modal Creado, tengo que investigar las clases de primeflex y las propiedas que se aplican a Dialog para que quede como en el diseño)
 
 Se solicitó poder buscar por coincidencia y filtrar por estado. Se cumplió. 
 
@@ -30,6 +31,8 @@ IMPORTANTE: Aspectos a mejorar
 
 Al momento me doy cuenta que quizá mi trabajo con las props, si bien funciona, es quizá no una solución tan optima para lo que pude investigar. Al momento 23/09/2024 no estoy tan informado sobre soluciones como redux tool kit
 por ende, independientemente si este proceso avanza o no, voy a reeditar este codigo para que sea más optimo el manejo de estados. Estuve investigando, es algo implementable, pero decidi realizar esta entrega antes de experimentar. 
+
+27/09/2024 - Se modificaron los background color del navbar y de los botones para que sea el que está en el diseño de figma, se estilizó el navbar para que el height sea más angosto. 
 
 IMPORTANTE: Feedback personal sobre este desafío.
 
