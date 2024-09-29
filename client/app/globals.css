@@ -14,11 +14,11 @@ body{
   color: #0763e7;
 }
 
-.no-header-custum .p-dialog-content {
-  padding: 0;             /* Elimina el relleno interno del modal */
-  border: none;           /* Elimina los bordes */
+
+.menu-color-custom{
+  background-color: #2d3e50;
 }
 
-.modal-custom{
-  height: 100%;
+.icon-spacing {
+  margin-bottom: 1rem; /* Ajusta este valor según lo necesites */
 }

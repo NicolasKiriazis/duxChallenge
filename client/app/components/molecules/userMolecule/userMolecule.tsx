@@ -1,6 +1,5 @@
 import React from "react"
 import Buttons from "../../atoms/button"
-import ButtonMolecule from "../buttonMolecule/buttonMolecule"
 
 interface UserMoleculeProps{
     action: () => void

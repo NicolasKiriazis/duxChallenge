@@ -1,11 +1,14 @@
 
 //Importamos PrimeReactProvider a App para aplicarlo a todo en nuestro proyecto
+
 import { PrimeReactProvider } from "primereact/api";
 import { userServices } from "./services/userServices";
+
 import Usuarios from "./components/pages/usuarios";
-import ModalOrganism from "./components/organisms/modalOganisim/modalOrganisim";
 
 
+//Se solicitó que la petición de usuarios sea solicitada Server Side, envío los usuarios por props a Usuarios
+// Que es un componente use client y puede manejar los estados
 
 export default async function Home() {
 
@@ -17,7 +20,8 @@ export default async function Home() {
         <main>
         <Usuarios users={users} />
         </main>
-        <footer></footer>
+        <footer>
+        </footer>
       </PrimeReactProvider>
     </div>
   );

@@ -5,6 +5,7 @@ import 'primeicons/primeicons.css'
 import '/node_modules/primeflex/primeflex.css'
 import '../app/globals.css'
 import Navbar from "./components/organisms/navBarOrganisim/navBarOrganisim";
+import Menu from "./components/organisms/menuOrganism/menuOrganism";
 
 
 export const metadata: Metadata = {
@@ -20,8 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        
         <Navbar/>
+        <div className="flex flex-wrap"> 
+        <Menu/>
+        <div className="w-11">
         {children}
+        </div>
+        </div>
+        
         
       </body>
     </html>

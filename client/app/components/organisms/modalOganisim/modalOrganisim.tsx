@@ -2,23 +2,25 @@
 
 import React, { useEffect, useState } from "react"
 import {Options, User} from '../../../types/type'
-import Input from "../../atoms/input"
 import { Message } from "primereact/message"
-import DropDownMolecule from "../../molecules/dropDownMolecule/dropDownMolecule"
 import { userServices } from "@/app/services/userServices"
-import { Button } from "primereact/button"
+
 import Buttons from "../../atoms/button"
+import DropDownMolecule from "../../molecules/dropDownMolecule/dropDownMolecule"
+import Input from "../../atoms/input"
 
 interface ModalOrganismProps {
-    estadoOptions: Options[]
-    sectorOptions: Options[]
+    estadoOptions: Options[] //Recibe las opciones de estado
+    sectorOptions: Options[] //Recibe las opciones de Sector
 
-    onUserAdded: () => void // Recibe una función que se llamará después de agregar el usuario
-    isEdit?: boolean;         // Indica si estamos en modo edición
+    onUserAdded: () => void   // Recibe la función para actualizar los usuarios
+    isEdit?: boolean;         // Recibe el valor de isEdit que indica si estamos en edición o creación
     userData?: User | null;   // Datos del usuario a editar (puede ser null si estamos creando)
 }
 
 const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOptions, isEdit, userData, onUserAdded}) => {
+
+    //Estados que setean al usuario
 
     const [id, setId] = useState('')
     const [usuario, setUsuario] = useState('')
@@ -28,7 +30,6 @@ const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOption
     // Si estamos en modo edición, establecemos los valores del usuario seleccionado
 
     useEffect(() => {
-        
         if(isEdit && userData){
             setId(userData.id)
             setEstado(userData.estado)
@@ -68,6 +69,9 @@ const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOption
     }
     if (usuario.length > 20) {
     newErrors.usuario = "El nombre no puede tener más de 20 caracteres.";
+    }
+    if(/^\d+$/.test(usuario)) {
+    newErrors.usuario = "El usuario no pueden ser solo números"
     }
 
     // Validar estado (no vacío)
@@ -128,10 +132,11 @@ const ModalOrganism:React.FC<ModalOrganismProps> = ({estadoOptions, sectorOption
             try {
                 await userServices.deleteUser(userData.id)
                 console.log(`Usuario con id ${userData.id} eliminado`);
-                onUserAdded()
                 setEstado(null); // Limpiar Dropdown
                 setSector('');    // Limpiar InputText
                 setUsuario('');   // Limpiar InputText
+
+                onUserAdded()
             } catch (error) {
                 console.log("Error al eliminar usuario", error);
             }
@@ -180,7 +185,7 @@ return <>
     {/* Botón de eliminar (solo visible en modo edición) */}
     {isEdit && (
         <Buttons
-            texto="✓ Cancelar"
+            texto="✓ Eliminar"
             classButton="bg-white text-color-custom ml-2"
             ButtonAction={handleDelete}
         />
